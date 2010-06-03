@@ -1,0 +1,5 @@
+name = Views Infinite Scroll
+description = Provides an Infinite Scrolling pager for Views
+package = Views
+core = 6.x
+dependencies[] = views
