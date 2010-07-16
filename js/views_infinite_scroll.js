@@ -4,7 +4,8 @@ Drupal.behaviors.views_infinite_scroll = function() {
     // Make sure that views ajax is disabled
     if(!Drupal.Views) {
       $.autopager({
-        content: Drupal.settings.views_infinite_scroll.content_selector,
+        appendTo: Drupal.settings.views_infinite_scroll.content_selector,
+        content: Drupal.settings.views_infinite_scroll.items_selector,
         link: Drupal.settings.views_infinite_scroll.next_selector,
         page: 0,
         start: function() {
