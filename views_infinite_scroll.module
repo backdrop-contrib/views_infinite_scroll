@@ -7,7 +7,7 @@
  * Implementation of hook_views_api().
  */
 function views_infinite_scroll_views_api() {
-  return array('api' => 2);
+  return array('api' => '3.0-alpha1');
 }
 
 /**

@@ -4,7 +4,7 @@
  * @file
  * Theme infinite scroll page
  */
-function theme_views_infinite_scroll_pager($tags = array(), $limit = 10, $element = 0, $parameters = array(), $quantity = 9) {
+function theme_views_infinite_scroll_pager($tags = array(), $limit = 10, $content_selector = 'div.view-content', $items_selector = 'div.view-content .views-row', $element = 0, $parameters = array(), $quantity = 9) {
   $PAGER_CLASS = 'pager';
   global $pager_page_array, $pager_total;
 
@@ -33,11 +33,13 @@ function theme_views_infinite_scroll_pager($tags = array(), $limit = 10, $elemen
       'class' => 'pager-next',
       'data' => $li_next,
     );
+   
     $settings = array(
       'views_infinite_scroll' => array(
         'pager_selector' => 'ul.' . $PAGER_CLASS,
         'next_selector' => 'li.pager-next a:first',    
-        'content_selector' => 'div.view-content',        
+        'content_selector' => $content_selector,        
+        'items_selector' => $items_selector,        
       )
     );
     drupal_add_js($settings, 'setting' );
