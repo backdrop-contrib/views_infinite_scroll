@@ -6,8 +6,8 @@
  */
 
 /**
-  * Implementation of hook_views_plugin().
-  */
+ * Implements hook_views_plugin().
+ */
 function views_infinite_scroll_views_plugins() {
   return array(
     'module' => 'views_infinite_scroll',

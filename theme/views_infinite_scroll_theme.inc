@@ -4,7 +4,18 @@
  * @file
  * Theme infinite scroll page
  */
-function theme_views_infinite_scroll_pager($tags = array(), $limit = 10, $view_name, $current_display, $content_selector = 'div.view-content', $items_selector = 'div.view-content .views-row', $img_path, $element = 0, $parameters = array(), $quantity = 9) {
+function theme_views_infinite_scroll_pager($variables) {
+  $tags = $variables['tags'];
+  $limit = isset($variables['limit']) ? $variables['limit'] : 10;
+  $view_name = $variables['view_name'];
+  $element = isset($variables['element']) ? $variables['element'] : 0;
+  $current_display = $variables['current_display'];
+  $content_selector = isset($variables['content_selector']) ? $variables['content_selector'] : 'div.view-content';
+  $items_selector = isset($variables['items_selector']) ? $variables['items_selector'] : 'div.view-content .views-row';
+  $img_path = $variables['img_path'];
+  $parameters = $variables['parameters'];
+  $quantity = $variables['quantity'];
+
   $PAGER_CLASS = 'pager';
   global $pager_page_array, $pager_total;
 
@@ -17,38 +28,47 @@ function theme_views_infinite_scroll_pager($tags = array(), $limit = 10, $view_n
   $pager_max = $pager_total[$element];
   // End of marker calculations.
 
-  $li_next = theme('pager_next', (isset($tags[3]) ? $tags[3] : t('››')), $limit, $element, 1, $parameters);
+  $li_next = theme('pager_next',
+    array(
+      'text' => (isset($tags[3]) ? $tags[3] : t('››')),
+      'limit' => $limit,
+      'element' => $element,
+      'interval' => 1,
+      'parameters' => $parameters,
+    )
+  );
   if (empty($li_next)) {
     $li_next = "&nbsp;";
   }
 
+
   if ($pager_total[$element] > 1) {
 
     $items[] = array(
-      'class' => 'pager-current',
+      'class' => array('pager-current'),
       'data' => t('@current of @max', array('@current' => $pager_current, '@max' => $pager_max)),
     );
 
     $items[] = array(
-      'class' => 'pager-next',
+      'class' => array('pager-next'),
       'data' => $li_next,
     );
-   
+
     $settings = array(
       'views_infinite_scroll' => array(
         array(
           'view_name' => $view_name,
-          'display' => $current_display, 
+          'display' => $current_display,
           'pager_selector' => 'ul.' . $PAGER_CLASS,
-          'next_selector' => 'li.pager-next a:first',    
-          'content_selector' => $content_selector,        
-          'items_selector' => $items_selector,        
+          'next_selector' => 'li.pager-next a:first',
+          'content_selector' => $content_selector,
+          'items_selector' => $items_selector,
           'img_path' => $img_path,
         ),
       ),
     );
     drupal_add_css(drupal_get_path('module', 'views_infinite_scroll') . '/css/views_infinite_scroll.css');
-    drupal_add_js($settings, 'setting' );
+    drupal_add_js($settings, array('type' => 'setting', 'scope' => JS_DEFAULT));
     $autopager_path = '';
     if (module_exists('libraries')) {
       $autopager_path = libraries_get_path('autopager');
@@ -60,7 +80,7 @@ function theme_views_infinite_scroll_pager($tags = array(), $limit = 10, $view_n
 
     drupal_add_js($autopager_path . '/jquery.autopager-1.0.0.js');
     drupal_add_js(drupal_get_path('module', 'views_infinite_scroll') . '/js/views_infinite_scroll.js');
-    
-    return theme('item_list', $items, NULL, 'ul', array('class' => $PAGER_CLASS));
+
+    return theme('item_list', array('items' => $items, 'title' => NULL, 'type' => 'ul', 'attributes' => array('class' => array($PAGER_CLASS))));
   }
 }
