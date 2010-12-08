@@ -20,29 +20,30 @@ class views_plugin_pager_infinite_scroll extends views_plugin_pager_full {
   }
 
   function render($input) {
+    global $base_url;
     $style_plugin = $this->view->display_handler->default_display->options['style_plugin']; 
     $content_selector = '';
     $items_selector = '';
-    
-    switch($style_plugin){
+    $img_path = $base_url . '/' . drupal_get_path('module', 'views_infinite_scroll') . '/images/ajax-loader.gif';
+    switch($this->view->plugin_name){
       case 'default':
         $content_selector = 'div.view-content';
-        $items_selector = 'div.view-content .views-row';
+        $items_selector = '.views-row';
         break;
       case 'grid':
         $content_selector = 'div.view-content tbody';
-        $items_selector = 'div.view-content tbody tr';
+        $items_selector = 'tr';
         break;
       case 'list':
         $content_selector = 'div.view-content .item-list > *';
-        $items_selector = 'div.view-content .views-row';
+        $items_selector = '.views-row';
         break;
       case 'table':
         $content_selector = 'div.view-content tbody';
-        $items_selector = 'div.view-content tbody tr';
+        $items_selector = 'tr';
         break;
     }
     $pager_theme = views_theme_functions('views_infinite_scroll_pager', $this->view, $this->display);
-    return theme($pager_theme, $input, $this->options['items_per_page'], $content_selector, $items_selector, $this->options['id']);
+    return theme($pager_theme, $input, $this->options['items_per_page'], $this->view->name, $this->view->current_display, $content_selector, $items_selector, $img_path, $this->options['id']);
   }
 }

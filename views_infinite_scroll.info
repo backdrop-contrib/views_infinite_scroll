@@ -1,3 +1,4 @@
+; $Id:
 name = Views Infinite Scroll
 description = Provides an Infinite Scrolling pager for Views
 package = Views
