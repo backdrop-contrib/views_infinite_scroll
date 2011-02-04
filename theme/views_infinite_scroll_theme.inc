@@ -28,6 +28,19 @@ function theme_views_infinite_scroll_pager($variables) {
   $pager_max = $pager_total[$element];
   // End of marker calculations.
 
+  $li_previous = theme('pager_previous',
+    array(
+      'text' => (isset($tags[1]) ? $tags[1] : t('‹‹')),
+      'limit' => $limit,
+      'element' => $element,
+      'interval' => 1,
+      'parameters' => $parameters,
+    )
+  );
+  if (empty($li_previous)) {
+    $li_previous = "&nbsp;";
+  }
+
   $li_next = theme('pager_next',
     array(
       'text' => (isset($tags[3]) ? $tags[3] : t('››')),
@@ -43,6 +56,10 @@ function theme_views_infinite_scroll_pager($variables) {
 
 
   if ($pager_total[$element] > 1) {
+    $items[] = array(
+      'class' => 'pager-previous',
+      'data' => $li_previous,
+    );
 
     $items[] = array(
       'class' => array('pager-current'),
