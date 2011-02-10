@@ -57,7 +57,7 @@ function theme_views_infinite_scroll_pager($variables) {
 
   if ($pager_total[$element] > 1) {
     $items[] = array(
-      'class' => 'pager-previous',
+      'class' => array('pager-previous'),
       'data' => $li_previous,
     );
 
