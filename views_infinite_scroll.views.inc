@@ -1,5 +1,4 @@
 <?php
-// $Id$
 /**
  * @file
  *  Provides the views plugin information.
