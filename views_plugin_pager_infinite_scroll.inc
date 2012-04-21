@@ -20,7 +20,6 @@ class views_plugin_pager_infinite_scroll extends views_plugin_pager_full {
 
   function render($input) {
     global $base_url;
-    $style_plugin = $this->view->display_handler->default_display->options['style_plugin'];
     $content_selector = '';
     $items_selector = '';
     $img_path = $base_url . '/' . drupal_get_path('module', 'views_infinite_scroll') . '/images/ajax-loader.gif';
