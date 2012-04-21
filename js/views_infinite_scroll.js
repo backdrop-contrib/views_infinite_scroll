@@ -39,7 +39,7 @@ Drupal.behaviors.views_infinite_scroll = {
               },
               load: function() {
                 $('div#views_infinite_scroll-ajax-loader').remove();
-                Drupal.attachBehaviors();
+                Drupal.attachBehaviors(this);
               }
             });
 
