@@ -21,6 +21,7 @@ class views_plugin_pager_infinite_scroll extends views_plugin_pager_full {
   function render($input) {
     global $base_url;
     $content_selector = '';
+    $style_options = $this->view->display_handler->default_display->options['style_options'];
     $items_selector = '';
     $img_path = $base_url . '/' . drupal_get_path('module', 'views_infinite_scroll') . '/images/ajax-loader.gif';
     switch ($this->view->plugin_name) {
@@ -29,15 +30,20 @@ class views_plugin_pager_infinite_scroll extends views_plugin_pager_full {
         $items_selector = '.views-row';
         break;
       case 'grid':
-        $content_selector = 'div.view-content tbody';
+        $content_selector = 'div.view-content > table > tbody';
         $items_selector = 'tr';
         break;
       case 'list':
-        $content_selector = 'div.view-content > .item-list > *';
+       if (array_key_exists('wrapper_class', $style_options)) {
+         $wrapper_class = '.' . $style_options['wrapper_class'];
+       } else {
+         $wrapper_class = '.item-list';
+       }
+       $content_selector = 'div.view-content>' . $wrapper_class . ' > *';
         $items_selector = '.views-row';
         break;
       case 'table':
-        $content_selector = 'div.view-content tbody';
+        $content_selector = 'div.view-content > table > tbody';
         $items_selector = 'tr';
         break;
     }
