@@ -33,7 +33,7 @@ class views_plugin_pager_infinite_scroll extends views_plugin_pager_full {
         $items_selector = 'tr';
         break;
       case 'list':
-        $content_selector = 'div.view-content .item-list > *';
+        $content_selector = 'div.view-content > .item-list > *';
         $items_selector = '.views-row';
         break;
       case 'table':
