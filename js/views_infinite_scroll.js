@@ -23,7 +23,7 @@ Drupal.behaviors.views_infinite_scroll = {
           if(!use_ajax) {
             var content_selector = 'div.view-id-' + settings.view_name + '.view-display-id-' + settings.display + ' ' + settings.content_selector;
             var items_selector   = content_selector + ' ' + settings.items_selector;
-            var next_selector    = settings.next_selector;
+            var next_selector    = 'div.view-id-' + settings.view_name + ' ' + settings.next_selector;
             var img_path         = settings.img_path;
             var img              = '<div id="views_infinite_scroll-ajax-loader"><img src="' + img_path + '" alt="loading..."/></div>';
             var img_location     = 'div.view-id-' + settings.view_name + '.view-display-id-' + settings.display + ' div.view-content'; 
