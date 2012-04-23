@@ -21,13 +21,14 @@ Drupal.behaviors.views_infinite_scroll = {
             });
           }
           if(!use_ajax) {
-            var content_selector = 'div.view-id-' + settings.view_name + '.view-display-id-' + settings.display + ' ' + settings.content_selector;
+            var view_selector    = 'div.view-id-' + settings.view_name + '.view-display-id-' + settings.display;
+            var content_selector = view_selector + ' > ' + settings.content_selector;
             var items_selector   = content_selector + ' ' + settings.items_selector;
-            var next_selector    = 'div.view-id-' + settings.view_name + ' ' + settings.next_selector;
+            var pager_selector   = view_selector + ' > div.item-list ' + settings.pager_selector;
+            var next_selector    = view_selector + ' ' + settings.next_selector;
+            var img_location     = view_selector + ' > div.view-content';
             var img_path         = settings.img_path;
             var img              = '<div id="views_infinite_scroll-ajax-loader"><img src="' + img_path + '" alt="loading..."/></div>';
-            var img_location     = 'div.view-id-' + settings.view_name + '.view-display-id-' + settings.display + ' div.view-content'; 
-            var pager_selector   = 'div.view-id-' + settings.view_name + '.view-display-id-' + settings.display + ' div.item-list ' + settings.pager_selector;
             $(pager_selector).hide();
             var handle = $.autopager({
               appendTo: content_selector,
