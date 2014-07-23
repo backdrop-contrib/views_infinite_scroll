@@ -12,6 +12,8 @@ function theme_views_infinite_scroll_pager($variables) {
   $content_selector = isset($variables['content_selector']) ? $variables['content_selector'] : 'div.view-content';
   $items_selector = isset($variables['items_selector']) ? $variables['items_selector'] : 'div.view-content .views-row';
   $img_path = $variables['img_path'];
+  $manual_load = isset($variables['manual_load']) ? $variables['manual_load'] : FALSE;
+  $text = isset($variables['text']) ? $variables['text'] : array('default' => 'Show More', 'translatable' => TRUE);
   $parameters = $variables['parameters'];
   $quantity = $variables['quantity'];
 
@@ -80,6 +82,9 @@ function theme_views_infinite_scroll_pager($variables) {
           'content_selector' => $content_selector,
           'items_selector' => $items_selector,
           'img_path' => $img_path,
+          'manual_load' => $manual_load,
+          'text' => t($text),
+          'pager_max' => $pager_max,
         ),
       ),
     );
