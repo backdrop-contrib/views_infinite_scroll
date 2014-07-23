@@ -47,7 +47,10 @@ class views_plugin_pager_infinite_scroll extends views_plugin_pager_full {
   function summary_title() {
     return "Infinite Scroll";
     if (!empty($this->options['offset'])) {
-      return format_plural($this->options['items_per_page'], 'Infinite scroll pager, @count item, skip @skip', 'Infinite scroll pager, @count items, skip @skip', array('@count' => $this->options['items_per_page'], '@skip' => $this->options['offset']));
+      return format_plural($this->options['items_per_page'], 'Infinite scroll pager, @count item, skip @skip', 'Infinite scroll pager, @count items, skip @skip', array(
+        '@count' => $this->options['items_per_page'],
+        '@skip' => $this->options['offset']
+      ));
     }
     return format_plural($this->options['items_per_page'], 'Infinite scroll pager, @count item', 'Infinite scroll pager, @count items', array('@count' => $this->options['items_per_page']));
   }
@@ -68,12 +71,13 @@ class views_plugin_pager_infinite_scroll extends views_plugin_pager_full {
         $items_selector = 'tr';
         break;
       case 'list':
-       if (array_key_exists('wrapper_class', $style_options) && !empty($style_options['wrapper_class'])) {
-         $wrapper_class = '.' . $style_options['wrapper_class'];
-       } else {
-         $wrapper_class = '.item-list';
-       }
-       $content_selector = 'div.view-content>' . $wrapper_class . ' > *';
+        if (array_key_exists('wrapper_class', $style_options) && !empty($style_options['wrapper_class'])) {
+          $wrapper_class = '.' . $style_options['wrapper_class'];
+        }
+        else {
+          $wrapper_class = '.item-list';
+        }
+        $content_selector = 'div.view-content>' . $wrapper_class . ' > *';
         $items_selector = '.views-row';
         break;
       case 'table':
@@ -83,16 +87,17 @@ class views_plugin_pager_infinite_scroll extends views_plugin_pager_full {
     }
     $pager_theme = views_theme_functions('views_infinite_scroll_pager', $this->view, $this->display);
     return theme($pager_theme, array(
-      'tags' => $input,
-      'quantity' => $this->options['items_per_page'],
-      'view_name' => $this->view->name,
-      'current_display' => $this->view->current_display,
-      'content_selector' => $content_selector,
-      'items_selector' => $items_selector,
-      'img_path' => $img_path,
-      'element' => $this->options['id'],
-      'manual_load' => $this->options['manual_load'],
-      'text' => $this->options['text'],)
+        'tags' => $input,
+        'quantity' => $this->options['items_per_page'],
+        'view_name' => $this->view->name,
+        'current_display' => $this->view->current_display,
+        'content_selector' => $content_selector,
+        'items_selector' => $items_selector,
+        'img_path' => $img_path,
+        'element' => $this->options['id'],
+        'manual_load' => $this->options['manual_load'],
+        'text' => $this->options['text'],
+      )
     );
   }
 }
