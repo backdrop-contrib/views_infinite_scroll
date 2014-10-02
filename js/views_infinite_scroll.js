@@ -8,7 +8,7 @@
 
       // Make sure that autopager plugin is loaded.
       if (!$.autopager) {
-        alert(Drupal.t('Autopager jquery plugin in not loaded.'));
+        alert(Drupal.t('Autopager jQuery plugin is not loaded.'));
         return;
       }
 
