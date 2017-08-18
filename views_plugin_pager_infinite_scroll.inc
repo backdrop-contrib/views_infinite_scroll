@@ -27,6 +27,7 @@ class views_plugin_pager_infinite_scroll extends views_plugin_pager_full {
    * {@inheritdoc}
    */
   function options_form(&$form, &$form_state) {
+    $form['warning']['#markup'] = t('Note: The infinite scroll option requires the <em>Use AJAX</em> setting to be enabled for this views display.');
     $form['items_per_page'] = array(
       '#title' => t('Items to display'),
       '#type' => 'textfield',
@@ -75,7 +76,6 @@ class views_plugin_pager_infinite_scroll extends views_plugin_pager_full {
    * {@inheritdoc}
    */
   function render($input) {
-    $this->view->set_use_ajax(TRUE);
     $pager_theme = views_theme_functions('views_infinite_scroll_pager', $this->view, $this->display);
     $settings = array(
       'views_infinite_scroll' => array(
