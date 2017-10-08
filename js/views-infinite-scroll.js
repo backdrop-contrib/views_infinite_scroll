@@ -21,7 +21,7 @@
   /**
    * Handle the automatic paging based on the scroll amount.
    */
-  Drupal.behaviors.views_infinite_scroll_automatic = {
+  Backdrop.behaviors.views_infinite_scroll_automatic = {
     attach : function(context, settings) {
 
       var settings = settings.views_infinite_scroll;

@@ -52,7 +52,7 @@ class views_plugin_pager_infinite_scroll extends views_plugin_pager_full {
       '#required' => FALSE,
       '#description' => t('Label to use on the manual link.'),
       '#default_value' => $this->options['text'],
-      '#process' => array('ctools_dependent_process'),
+  //    '#process' => array('ctools_dependent_process'),
       '#dependency' => array(
         'edit-pager-options-manual-load' => array(1),
       ),
@@ -79,13 +79,13 @@ class views_plugin_pager_infinite_scroll extends views_plugin_pager_full {
     $pager_theme = views_theme_functions('views_infinite_scroll_pager', $this->view, $this->display);
     $settings = array(
       'views_infinite_scroll' => array(
-        'img_path' => file_create_url(drupal_get_path('module', 'views_infinite_scroll') . '/images/ajax-loader.gif'),
+        'img_path' => file_create_url(backdrop_get_path('module', 'views_infinite_scroll') . '/images/ajax-loader.gif'),
         // The threshold for how far to the bottom you should reach before reloading.
         'scroll_threshold' => variable_get('views_infinite_scroll_scroll_threshold', 200),
       ),
     );
-    drupal_add_js($settings, array('type' => 'setting', 'scope' => JS_DEFAULT));
-    drupal_add_js(drupal_get_path('module', 'views_infinite_scroll') . '/views-infinite-scroll.js', array('scope' => 'footer'));
+    backdrop_add_js($settings, array('type' => 'setting', 'scope' => JS_DEFAULT));
+    backdrop_add_js(backdrop_get_path('module', 'views_infinite_scroll') . '/js/views-infinite-scroll.js', array('scope' => 'footer'));
     return theme($pager_theme, array('text' => $this->options['text'], 'manual_load' => $this->options['manual_load']));
   }
 }

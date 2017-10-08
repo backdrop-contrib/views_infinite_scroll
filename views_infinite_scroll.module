@@ -5,6 +5,15 @@
  * Create a pager plugin to allow infinite scroll on views.
  */
 
+ /**
+  * Implements hook_autoload_info().
+  */
+function views_infinite_scroll_autoload_info() {
+  return array(
+    'views_plugin_pager_infinite_scroll' => 'includes/views_plugin_pager_infinite_scroll.inc',
+  );
+}
+
 /**
  * Implements hook_views_api().
  */

@@ -1,6 +1,7 @@
 name = Views Infinite Scroll
 description = Provides an Infinite Scrolling pager for Views
 package = Views
-core = 7.x
+backdrop = 1.x
+type = module
+
 dependencies[] = views
-files[] = views_plugin_pager_infinite_scroll.inc
