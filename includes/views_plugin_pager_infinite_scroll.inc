@@ -52,9 +52,11 @@ class views_plugin_pager_infinite_scroll extends views_plugin_pager_full {
       '#required' => FALSE,
       '#description' => t('Label to use on the manual link.'),
       '#default_value' => $this->options['text'],
-  //    '#process' => array('ctools_dependent_process'),
-      '#dependency' => array(
-        'edit-pager-options-manual-load' => array(1),
+      '#states' => array(
+        //Hide the manual load label if manual_load is unchecked.
+        'invisible' => array(
+         ':input[name="pager_options[manual_load]"]' => array('checked' => FALSE),
+        ),
       ),
     );
   }
