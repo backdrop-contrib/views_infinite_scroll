@@ -83,7 +83,7 @@ class views_plugin_pager_infinite_scroll extends views_plugin_pager_full {
       'views_infinite_scroll' => array(
         'img_path' => file_create_url(backdrop_get_path('module', 'views_infinite_scroll') . '/images/ajax-loader.gif'),
         // The threshold for how far to the bottom you should reach before reloading.
-        'scroll_threshold' => variable_get('views_infinite_scroll_scroll_threshold', 200),
+        'scroll_threshold' => 200,
       ),
     );
     backdrop_add_js($settings, array('type' => 'setting', 'scope' => JS_DEFAULT));
