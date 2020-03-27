@@ -20,6 +20,7 @@ class views_plugin_pager_infinite_scroll extends views_plugin_pager_full {
     $options['text'] = array('default' => 'Show More', 'translatable' => TRUE);
     $options['items_per_page'] = array('default' => 10);
     $options['offset'] = array('default' => 0);
+    $options['id'] = array('default' => 0);
     return $options;
   }
 
@@ -39,6 +40,12 @@ class views_plugin_pager_infinite_scroll extends views_plugin_pager_full {
       '#title' => t('Offset'),
       '#description' => t('The number of items to skip. For example, if this field is 3, the first 3 items will be skipped and not displayed.'),
       '#default_value' => $this->options['offset'],
+    );
+    $form['id'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Pager ID'),
+      '#description' => t("Unless you're experiencing problems with pagers related to this view, you should leave this at 0. If using multiple pagers on one page you may need to set this number to a higher value so as not to conflict within the ?page= array. Large values will add a lot of commas to your URLs, so avoid if possible."),
+      '#default_value' => $this->options['id'],
     );
     $form['manual_load'] = array(
       '#type' => 'checkbox',
@@ -86,6 +93,11 @@ class views_plugin_pager_infinite_scroll extends views_plugin_pager_full {
     );
     drupal_add_js($settings, array('type' => 'setting', 'scope' => JS_DEFAULT));
     drupal_add_js(drupal_get_path('module', 'views_infinite_scroll') . '/views-infinite-scroll.js', array('scope' => 'footer'));
-    return theme($pager_theme, array('text' => $this->options['text'], 'manual_load' => $this->options['manual_load']));
+    return theme($pager_theme, array(
+      'text' => $this->options['text'],
+      'manual_load' => $this->options['manual_load'],
+      'element' => $this->get_pager_id(),
+    ));
   }
+
 }
