@@ -21,6 +21,7 @@ class views_plugin_pager_infinite_scroll extends views_plugin_pager_full {
     $options['items_per_page'] = array('default' => 10);
     $options['offset'] = array('default' => 0);
     $options['id'] = array('default' => 0);
+    $options['total_pages'] = array('default' => '');
     return $options;
   }
 
@@ -46,6 +47,12 @@ class views_plugin_pager_infinite_scroll extends views_plugin_pager_full {
       '#title' => t('Pager ID'),
       '#description' => t("Unless you're experiencing problems with pagers related to this view, you should leave this at 0. If using multiple pagers on one page you may need to set this number to a higher value so as not to conflict within the ?page= array. Large values will add a lot of commas to your URLs, so avoid if possible."),
       '#default_value' => $this->options['id'],
+    );
+    $form['total_pages'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Number of pages'),
+      '#description' => t('The total number of pages. Leave empty to show all pages.'),
+      '#default_value' => $this->options['total_pages'],
     );
     $form['manual_load'] = array(
       '#type' => 'checkbox',
