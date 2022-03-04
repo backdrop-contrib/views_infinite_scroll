@@ -79,6 +79,7 @@ function views_infinite_scroll_preprocess_views_infinite_scroll_pager(&$vars) {
   $vars['button'] = array(
     '#theme' => 'pager_next',
     '#text' => $vars['text'],
+    '#element' => $vars['element'],
   );
   $vars['automatic_scroll_class'] = (empty($vars['manual_load'])) ? 'pager--infinite-scroll-auto' : '';
 }
