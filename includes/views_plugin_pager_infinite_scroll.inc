@@ -12,6 +12,8 @@
  */
 class views_plugin_pager_infinite_scroll extends views_plugin_pager_full {
 
+  var $has_more_results = FALSE;
+
   /**
    * {@inheritdoc}
    */
@@ -91,7 +93,47 @@ class views_plugin_pager_infinite_scroll extends views_plugin_pager_full {
   /**
    * {@inheritdoc}
    */
+  function use_count_query() {
+    return FALSE;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  function query() {
+    parent::query();
+    if ($this->get_items_per_page() > 0 && (empty($this->options['total_pages']) || ($this->get_current_page() < $this->options['total_pages']))) {
+      $limit = $this->options['items_per_page'];;
+      $limit += 1;
+      $this->view->query->set_limit($limit);
+    }
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  function post_execute(&$result) {
+    global $pager_total;
+
+    if ($this->get_items_per_page() > 0 && count($result) > $this->get_items_per_page()) {
+      array_pop($result);
+      $total = PHP_INT_MAX / 2;
+      $this->has_more_results = TRUE;
+    }
+    else {
+      $total = $this->get_current_page() * $this->get_items_per_page() + count($result);
+    }
+    $pager_id = $this->get_pager_id();
+    $pager_total[$pager_id] = $total;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   function render($input) {
+    if (!$this->has_more_results) {
+      return;
+    }
     $pager_theme = views_theme_functions('views_infinite_scroll_pager', $this->view, $this->display);
     $settings = array(
       'views_infinite_scroll' => array(
