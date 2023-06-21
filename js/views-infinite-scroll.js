@@ -16,6 +16,7 @@
     $new_view.find('> .view-content').last().first().prepend($existing_content);
     $existing_view.replaceWith($new_view);
     $(document).trigger('infiniteScrollComplete', [$new_view, $existing_content]);
+    Backdrop.announce(Backdrop.t('New results have been added to the page.'));
   };
 
   /**

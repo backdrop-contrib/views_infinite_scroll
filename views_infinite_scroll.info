@@ -5,3 +5,4 @@ backdrop = 1.x
 type = module
 
 dependencies[] = views
+dependencies[] = system (>= 1.18.2)

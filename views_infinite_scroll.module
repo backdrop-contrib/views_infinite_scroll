@@ -76,6 +76,8 @@ function views_infinite_scroll_views_ajax_data_alter(&$commands, view $view) {
  * Implements hook_preprocess_views_infinite_scroll_pager().
  */
 function views_infinite_scroll_preprocess_views_infinite_scroll_pager(&$vars) {
+  backdrop_add_library('system', 'backdrop.ajax');
+  backdrop_add_library('system', 'backdrop.announce');
   $vars['button'] = array(
     '#theme' => 'pager_next',
     '#text' => $vars['text'],
